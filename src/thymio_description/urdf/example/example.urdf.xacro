@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot name="example" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 依赖库，类似 c++ 头文件或者 python import -->
+    <xacro:include filename="example_materials.xacro"/> 
+
+    <!-- 定义变量 -->
+    <xacro:property name="base_link_length" value="0.2"/>
+    <xacro:property name="base_link_width" value="0.3"/>
+    <xacro:property name="base_link_height" value="0.6"/>
+    <xacro:property name="second_link_length" value="0.8"/>
+    <xacro:property name="second_link_radius" value="0.05"/>
+
+    <!-- 自定义函数 -->
+    <xacro:macro name="box" params="length width height">
+        <box size="${length} ${width} ${height}"/>
+    </xacro:macro>
+
+
+
+    <!-- 建模部分 -->
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 ${base_link_height / 2.0}"  rpy="0 0 0"/>
+            <geometry>
+                <xacro:box length="${base_link_length}" width="${base_link_width}" height="${base_link_height}"/>
+            </geometry>
+            <material name="green"/>
+        </visual>
+    </link>
+
+    <link name="second_link">
+        <visual>
+            <origin xyz="${second_link_length / 2.0} 0 0" rpy="0 ${pi / 2.0} 0"/>
+            <geometry>
+                <cylinder length="${second_link_length}" radius="${second_link_radius}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="second_link_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="second_link"/>
+        <origin xyz="${base_link_length / 2.0} 0 ${base_link_height / 2.0}" rpy="0 0 0"/>
+    </joint>
+
+</robot>
