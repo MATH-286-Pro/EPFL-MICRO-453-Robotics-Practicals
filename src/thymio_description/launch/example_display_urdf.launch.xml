@@ -1,0 +1,28 @@
+<!-- launch 标签：ROS2 启动文件的根元素 -->
+<launch>        
+    <!-- 定义名为 urdf_path 的启动参数 -->                                             
+    <arg name="urdf_path"                                    
+         default="$(find-pkg-share thymio_description)/urdf/example/example.urdf"/>  
+         <!-- 参数默认值：使用 find-pkg-share 查找 thymio_description 包中的 URDF 文件 -->
+
+    <!-- 定义名为 rviz_config_path 的启动参数 -->
+    <arg name="rviz_config_path"                             
+         default="$(find-pkg-share thymio_description)/rviz/example_rviz_config.rviz" /> 
+         <!-- 参数默认值：指向 RViz 配置文件 -->
+
+    <!-- 启动 robot_state_publisher 节点，用于发布机器人各关节的 TF 变换 -->
+    <node pkg="robot_state_publisher" exec="robot_state_publisher"> 
+        <!-- 设置参数 robot_description -->
+        <param name="robot_description"                       
+               value="$(command 'xacro $(var urdf_path)')"/> 
+               <!-- 参数值：通过 xacro 命令处理 urdf_path 对应的 URDF 文件生成机器人描述 -->
+    </node>
+
+    <!-- 启动 joint_state_publisher_gui 节点，为机器人关节提供交互式 GUI 界面 -->
+    <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"/> 
+
+    <!-- 启动 RViz2 可视化工具 -->
+    <node pkg="rviz2" exec="rviz2"                             
+          args="-d $(var rviz_config_path)" />               
+          <!-- 使用 rviz_config_path 参数指定的配置文件 -->
+</launch>

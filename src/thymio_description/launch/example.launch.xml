@@ -1,0 +1,21 @@
+<launch>
+    
+    <node pkg="demo_nodes_py" exec="talker" name="stress">      <!-- 启动 发布者节点 talker，节点名称为 'stress' -->
+        <remap from="chatter" to="exams"/>                      <!-- 将该节点默认发布的 chatter 话题重命名为 exams -->
+    </node>
+
+    
+    <node pkg="demo_nodes_py" exec="talker" name="BA1_students">   <!-- 启动 发布者节点 talker，节点名称为 'BA1_students' -->
+        <remap from="chatter" to="exams"/>                         <!-- 将其 chatter 话题重映射到 exams -->
+    </node>
+
+    
+    <node pkg="demo_nodes_py" exec="listener" name="BA2">       <!-- 启动 订阅者节点 listener，节点名称为 'BA2' -->
+        <remap from="chatter" to="exams"/>                      <!-- 将该节点订阅的 chatter 话题重映射为 exams -->
+    </node>
+
+    
+    <node pkg="demo_nodes_py" exec="listener" name="MAN">       <!-- 启动 订阅者节点 listener，节点名称为 'MAN' -->
+        <remap from="chatter" to="exams"/>                      <!-- 同样将 listener 的 chatter 话题重命名为 exams -->
+    </node>
+</launch>
