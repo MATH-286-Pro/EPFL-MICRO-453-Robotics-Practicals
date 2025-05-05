@@ -11,7 +11,7 @@
     
     <!-- 定义尺寸 -->
     <xacro:property name="ground_offset"     value="${4.5*mm}"/>
-    <xacro:property name="base_link_length"  value="${11*cm}"/>
+    <xacro:property name="base_link_length"  value="${9.1*cm}"/>
     <xacro:property name="base_link_width"   value="${11.2*cm}"/>
     <xacro:property name="base_link_height"  value="${4.4*cm}"/>
     <xacro:property name="wheel_link_length" value="${1.5*cm}"/>

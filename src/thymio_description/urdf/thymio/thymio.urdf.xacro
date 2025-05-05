@@ -5,6 +5,7 @@
     <xacro:include filename="materials.xacro"/> 
     <xacro:include filename="thymio_chassis.xacro"/> 
     <xacro:include filename="gazebo.xacro"/> 
+    <xacro:include filename="proximity_sensors.xacro"/> 
 
     <!-- 建模 -->
     <!-- 创建 基座 -->
