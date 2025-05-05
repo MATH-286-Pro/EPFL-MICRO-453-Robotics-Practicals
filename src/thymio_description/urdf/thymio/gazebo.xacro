@@ -20,4 +20,34 @@
     <material>Gazebo/Black</material>
   </gazebo>
 
+  <!-- 控制器设置 -->
+  <gazebo>
+    <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
+
+    <!-- Update rate in Hz -->
+    <update_rate>50</update_rate>
+
+    <!-- wheels -->
+    <left_joint> wheel_1_joint </left_joint>
+    <right_joint> wheel_2_joint </right_joint>
+
+    <!-- kinematics -->
+    <wheel_separation> ${wheel_separation} </wheel_separation>  <!-- 车轮间距 -->
+    <wheel_diameter>  ${wheel_link_radius} </wheel_diameter>    <!-- 车轮半径 -->
+
+    <!-- input -->
+    <command_topic>cmd_vel</command_topic>
+
+    <!-- output -->
+    <publish_odom>true</publish_odom>
+    <publish_odom_tf>true</publish_odom_tf>
+    <publish_wheel_tf>true</publish_wheel_tf>
+
+    <odometry_topic>odom</odometry_topic>
+    <odometry_frame>odom</odometry_frame>
+    <robot_base_frame>base_link</robot_base_frame>  <!-- 名称 -->
+
+    </plugin>
+  </gazebo>
+
 </robot>

@@ -16,6 +16,7 @@
     <xacro:property name="base_link_height"  value="${4.4*cm}"/>
     <xacro:property name="wheel_link_length" value="${1.5*cm}"/>
     <xacro:property name="wheel_link_radius" value="${2.2*cm}"/>
+    <xacro:property name="wheel_separation"  value="${9.35*cm}"/>
     <xacro:property name="caster_wheel_ball_radius" value="${9*mm}"/>
 
     <xacro:property name="front_axis" value="${2.5*cm}"/>
