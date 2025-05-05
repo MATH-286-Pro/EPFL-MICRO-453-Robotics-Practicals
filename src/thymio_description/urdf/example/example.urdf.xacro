@@ -3,6 +3,7 @@
 
     <!-- 依赖库，类似 c++ 头文件或者 python import -->
     <xacro:include filename="example_materials.xacro"/> 
+    <xacro:include filename="example_inertia.xacro"/>
 
     <!-- 定义变量 -->
     <xacro:property name="base_link_length" value="0.2"/>
@@ -10,6 +11,9 @@
     <xacro:property name="base_link_height" value="0.6"/>
     <xacro:property name="second_link_length" value="0.8"/>
     <xacro:property name="second_link_radius" value="0.05"/>
+
+    <xacro:property name="base_link_mass" value="0.5"/>   <!-- Mass in [kg] -->
+    <xacro:property name="second_link_mass" value="0.2"/> <!-- Mass in [kg] -->
 
     <!-- 自定义函数 -->
     <xacro:macro name="box" params="length width height">
@@ -27,6 +31,14 @@
             </geometry>
             <material name="green"/>
         </visual>
+        <collision>
+            <origin xyz="0 0 ${base_link_height / 2.0}"  rpy="0 0 0"/>
+            <geometry>
+                <xacro:box length="${base_link_length}" width="${base_link_width}" height="${base_link_height}"/>
+            </geometry>
+        </collision>
+        <xacro:box_inertia m="${base_link_mass}" l="${base_link_length}" w="${base_link_width}" h="${base_link_height}"
+                        xyz="0 0 ${base_link_height / 2.0}"  rpy="0 0 0"/>
     </link>
 
     <link name="second_link">
@@ -37,6 +49,14 @@
             </geometry>
             <material name="blue"/>
         </visual>
+        <collision>
+            <origin xyz="${second_link_length / 2.0} 0 0" rpy="0 ${pi / 2.0} 0"/>
+            <geometry>
+                <cylinder length="${second_link_length}" radius="${second_link_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:cylinder_inertia m="${second_link_mass}" r="${second_link_radius}" h="${second_link_length}"
+                                xyz="${second_link_length / 2.0} 0 0" rpy="0 ${pi / 2.0} 0"/>
     </link>
 
     <joint name="second_link_joint" type="fixed">

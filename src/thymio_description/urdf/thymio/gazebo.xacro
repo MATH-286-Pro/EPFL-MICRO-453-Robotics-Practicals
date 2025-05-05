@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- 摩擦力设置 -->
+  <gazebo reference="caster_wheel_link">
+    <mu1 value="0.31" />
+    <mu2 value="0.31" />
+  </gazebo>
+
+  <!-- 颜色设置 -->、
+  <gazebo reference="base_link">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <gazebo reference="wheel_1">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="wheel_2">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+</robot>

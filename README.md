@@ -12,6 +12,19 @@ ros2 launch launch.py
 
 ## **学习过程**
 
+### Gazebo
+- 安装
+```bash
+# 下载并安装 gazebo
+curl -sSL http://get.gazebosim.org | sh
+
+# 查看 gazebo 位置
+which gazebo
+
+# 启动 gazebo
+gazebo
+```
+
 ### **launch 文件**
 
 什么是 .xml 文件  

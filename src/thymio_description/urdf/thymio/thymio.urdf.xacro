@@ -4,43 +4,47 @@
     <!-- 依赖库，类似 c++ 头文件或者 python import -->
     <xacro:include filename="materials.xacro"/> 
     <xacro:include filename="thymio_chassis.xacro"/> 
+    <xacro:include filename="gazebo.xacro"/> 
 
     <!-- 建模 -->
     <!-- 创建 基座 -->
     <link name="base_link">                             
-        <visual>                                        
-            <origin xyz="0 0 ${base_link_height/2 + ground_offset}"  rpy="0 0 0"/>        
-            <geometry>                                  
-                <xacro:box length="${base_link_length}"
-                           width="${base_link_width}" 
-                           height="${base_link_height}"/>
-            </geometry>                       
-            <material name="white"/>                    
-        </visual>                              
+        <xacro:build_base length="${base_link_length}"
+                          width="${base_link_width}"
+                          height="${base_link_height}"
+                          mass="${base_mass}" />                             
     </link>                                   
 
     <!-- 创建 轮子1-->
     <link name="wheel_1">    
       <xacro:build_wheel length="${wheel_link_length}"   
-                         radius="${wheel_link_radius}"/>                                          
+                         radius="${wheel_link_radius}"
+                         mass="${wheel_mass}"/>                                          
     </link> 
 
     <!-- 创建 轮子2-->
     <link name="wheel_2">    
       <xacro:build_wheel length="${wheel_link_length}"   
-                         radius="${wheel_link_radius}"/>                                          
+                         radius="${wheel_link_radius}"
+                         mass="${wheel_mass}"/>                                                                                   
     </link> 
 
 
     <!-- 创建 万向轮-->
-    <link name="caster_wheel">                           
+    <link name="caster_wheel_link">                           
         <visual>                                        
             <origin xyz="0 0 0" rpy="0 0 0"/>        
             <geometry>                                  
                 <sphere radius="${caster_wheel_ball_radius}"/>
             </geometry>                        
             <material name="white"/>                     
-        </visual>                             
+        </visual>     
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>        
+            <geometry>                                  
+                <sphere radius="${caster_wheel_ball_radius}"/>
+            </geometry>           
+        </collision>                        
     </link> 
 
 
@@ -51,6 +55,7 @@
         <child link="wheel_1"/>
         <origin xyz="${front_axis} 0.05 ${wheel_link_radius}" rpy="0 0 0"/>          
         <axis xyz="0 1 0"/>
+        <dynamics damping="0.1" friction="0.2"/>   <!-- 添加阻尼，摩擦-->
     </joint>
 
     
@@ -59,13 +64,15 @@
         <child link="wheel_2"/>
         <origin xyz="${front_axis} -0.05 ${wheel_link_radius}" rpy="0 0 0"/>       
         <axis xyz="0 1 0"/>
+        <dynamics damping="0.1" friction="0.2"/>
     </joint>
 
     <joint name="caster_wheel_joint" type="continuous">           
         <parent link="base_link"/>
-        <child link="caster_wheel"/>
+        <child link="caster_wheel_link"/>
         <origin xyz="${rear_axis} 0.0 ${caster_wheel_ball_radius}" rpy="0 0 0"/>         
         <axis xyz="0 1 0"/>
+        <dynamics damping="0.1" friction="0.2"/>
     </joint>
 
 </robot>
