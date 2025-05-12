@@ -12,8 +12,8 @@
     </node>
 
     <!-- Test -->
-    <!-- <node pkg="thymio_mini_project" exec="command_node">
-    </node> -->
+    <node pkg="thymio_mini_project" exec="command_node">
+    </node>
     <!-- Test -->
 
     <node pkg="rviz2" exec="rviz2" output="screen"
