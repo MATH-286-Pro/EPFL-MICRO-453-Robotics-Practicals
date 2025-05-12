@@ -28,7 +28,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-
+            "command_node = thymio_mini_project.command_node:main",
         ],
     },
 )
